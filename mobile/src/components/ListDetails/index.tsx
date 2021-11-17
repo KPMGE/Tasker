@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, Modal } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { TaskCheckList } from "../TaskCheckList";
+import Modal from "react-native-modal";
 import styles from "./styles";
 
 type ListDetailsProps = {
@@ -16,12 +17,15 @@ export const ListDetails = ({ color }: ListDetailsProps) => {
 
   return (
     <Modal
-      onRequestClose={closeModal}
-      presentationStyle="fullScreen"
-      animationType="slide"
-      visible={visible}
+      isVisible={visible}
+      animationIn="slideInUp"
+      onTouchStart={closeModal}
+      hasBackdrop={false}
+      style={{ width: "100%", margin: 0 }}
     >
       <View style={[styles.container, { backgroundColor: color }]}>
+        <TouchableOpacity style={styles.line} onPress={closeModal} />
+
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Shopping</Text>
           <Text style={styles.subTitle}>3 tasks</Text>

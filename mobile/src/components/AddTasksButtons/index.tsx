@@ -1,6 +1,9 @@
 import React from "react";
-import { View, Modal, Image, TouchableOpacity, Text } from "react-native";
+import { View, Image, TouchableOpacity, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+
+import Modal from "react-native-modal";
+
 import styles from "./styles";
 
 import taskImage from "../../assets/Path.jpg";
@@ -14,12 +17,13 @@ type AddTasksButtonsProps = {
 export const AddTasksButtons = ({ visible, toggle }: AddTasksButtonsProps) => {
   return (
     <Modal
-      visible={visible}
+      isVisible={visible}
+      coverScreen={true}
+      style={styles.modal}
       statusBarTranslucent={true}
-      transparent={true}
-      animationType="slide"
+      hasBackdrop={false}
     >
-      <View style={styles.modalView}>
+      <View style={styles.buttonsView}>
         <TouchableOpacity style={styles.button}>
           <Image source={taskImage as any} />
           <View style={styles.textContainer}>

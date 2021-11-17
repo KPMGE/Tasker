@@ -1,26 +1,21 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
-import { BlurView } from "expo-blur";
-import { Feather } from "@expo/vector-icons";
+import { Text, View } from "react-native";
 import { ListTasks } from "../../components/ListTasks";
 import { TaskCheckList } from "../../components/TaskCheckList";
 import { AddTasksButtons } from "../../components/AddTasksButtons";
+import { CircleButton } from "../../components/CircleButton";
 
 import styles from "./styles";
 
 export const Home = () => {
-  const [openModal, setOpenModal] = useState(false);
+  const [showAddButtons, setShowAddButtons] = useState(false);
 
-  const toggleModal = () => {
-    setOpenModal(!openModal);
+  const toggleShowAddButtons = () => {
+    setShowAddButtons(!showAddButtons);
   };
 
   return (
-    <BlurView
-      intensity={openModal ? 20 : 0}
-      tint="dark"
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <Text style={styles.title}>Today</Text>
 
       <View style={styles.todayTasksContainer}>
@@ -32,13 +27,11 @@ export const Home = () => {
         <ListTasks />
       </View>
 
-      {!openModal && (
-        <TouchableOpacity style={styles.button} onPress={toggleModal}>
-          <Feather name="plus" size={65} color="#006CFF" />
-        </TouchableOpacity>
+      {!showAddButtons && (
+        <CircleButton style={styles.button} onPress={toggleShowAddButtons} />
       )}
 
-      <AddTasksButtons visible={openModal} toggle={toggleModal} />
-    </BlurView>
+      <AddTasksButtons visible={showAddButtons} toggle={toggleShowAddButtons} />
+    </View>
   );
 };

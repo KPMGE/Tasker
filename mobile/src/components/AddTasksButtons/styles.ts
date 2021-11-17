@@ -2,7 +2,11 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../global/theme";
 
 export default StyleSheet.create({
-  modalView: {
+  modal: {
+    margin: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+  },
+  buttonsView: {
     position: "absolute",
     right: 16,
     bottom: 120,

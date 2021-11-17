@@ -9,6 +9,15 @@ export default StyleSheet.create({
     borderRadius: 15,
     marginTop: Constants.statusBarHeight + 10,
   },
+  line: {
+    height: 5,
+    width: 40,
+    position: "absolute",
+    top: 5,
+    backgroundColor: "#252A31",
+    borderRadius: 5,
+    opacity: 0.2,
+  },
   titleContainer: {
     alignSelf: "flex-start",
     marginTop: 30,
