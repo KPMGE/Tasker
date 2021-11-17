@@ -5,10 +5,20 @@ import { theme } from "../../global/theme";
 import styles from "./styles";
 
 type TaskCheckItemProps = {
-  circleColor: string;
+  taskTextColor?: string;
+  circleColor?: string;
+  showRightCircle?: boolean;
+  checkboxColor?: string;
 };
 
-export const TaskCheckItem = ({ circleColor }: TaskCheckItemProps) => {
+export const TaskCheckItem = (props: TaskCheckItemProps) => {
+  const {
+    circleColor = "blue",
+    showRightCircle = true,
+    checkboxColor = theme.listColors.blue,
+    taskTextColor = theme.app.grayText,
+  } = props;
+
   const [checkboxChecked, setCheckboxChecked] = useState(false);
 
   const toggleCheckbox = () => {
@@ -20,19 +30,24 @@ export const TaskCheckItem = ({ circleColor }: TaskCheckItemProps) => {
       <View style={styles.checkboxContainer}>
         <CheckBox
           value={checkboxChecked}
-          color={theme.listColors.blue}
+          color={checkboxColor}
           style={styles.checkbox}
           onValueChange={toggleCheckbox}
         />
         <View style={styles.descriptionContainer}>
           <Text
-            style={[styles.description, { opacity: checkboxChecked ? 0.5 : 1 }]}
+            style={[
+              styles.description,
+              { opacity: checkboxChecked ? 0.5 : 1, color: taskTextColor },
+            ]}
           >
             Study React Native
           </Text>
         </View>
 
-        <View style={[styles.circle, { backgroundColor: circleColor }]} />
+        {showRightCircle && (
+          <View style={[styles.circle, { backgroundColor: circleColor }]} />
+        )}
       </View>
     </View>
   );

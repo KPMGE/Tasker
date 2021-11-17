@@ -23,7 +23,6 @@ export default StyleSheet.create({
   },
   description: {
     fontSize: 18,
-    color: theme.app.grayText,
   },
   circle: {
     height: 12,
