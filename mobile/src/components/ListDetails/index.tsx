@@ -18,10 +18,12 @@ export const ListDetails = ({ color }: ListDetailsProps) => {
   return (
     <Modal
       isVisible={visible}
-      animationIn="slideInUp"
-      onTouchStart={closeModal}
-      hasBackdrop={false}
       style={{ width: "100%", margin: 0 }}
+      animationIn="slideInUp"
+      hasBackdrop={false}
+      swipeDirection="down"
+      onBackButtonPress={closeModal}
+      onSwipeComplete={closeModal}
     >
       <View style={[styles.container, { backgroundColor: color }]}>
         <TouchableOpacity style={styles.line} onPress={closeModal} />

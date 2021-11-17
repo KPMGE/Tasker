@@ -22,6 +22,7 @@ export const AddTasksButtons = ({ visible, toggle }: AddTasksButtonsProps) => {
       style={styles.modal}
       statusBarTranslucent={true}
       hasBackdrop={false}
+      onBackButtonPress={toggle}
     >
       <View style={styles.buttonsView}>
         <TouchableOpacity style={styles.button}>
