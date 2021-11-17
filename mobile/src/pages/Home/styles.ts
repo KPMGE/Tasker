@@ -7,7 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: Constants.statusBarHeight + 10,
+    paddingTop: Constants.statusBarHeight + 10,
   },
   title: {
     fontSize: 32,

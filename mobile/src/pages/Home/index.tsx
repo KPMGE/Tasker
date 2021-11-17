@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
+import { BlurView } from "expo-blur";
 import { Feather } from "@expo/vector-icons";
 import { ListTasks } from "../../components/ListTasks";
 import { TaskCheckList } from "../../components/TaskCheckList";
@@ -15,7 +16,11 @@ export const Home = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <BlurView
+      intensity={openModal ? 20 : 0}
+      tint="dark"
+      style={styles.container}
+    >
       <Text style={styles.title}>Today</Text>
 
       <View style={styles.todayTasksContainer}>
@@ -34,6 +39,6 @@ export const Home = () => {
       )}
 
       <AddTasksButtons visible={openModal} toggle={toggleModal} />
-    </View>
+    </BlurView>
   );
 };

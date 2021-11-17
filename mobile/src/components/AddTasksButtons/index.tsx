@@ -13,7 +13,12 @@ type AddTasksButtonsProps = {
 
 export const AddTasksButtons = ({ visible, toggle }: AddTasksButtonsProps) => {
   return (
-    <Modal visible={visible} transparent={true} animationType="slide">
+    <Modal
+      visible={visible}
+      statusBarTranslucent={true}
+      transparent={true}
+      animationType="slide"
+    >
       <View style={styles.modalView}>
         <TouchableOpacity style={styles.button}>
           <Image source={taskImage as any} />
