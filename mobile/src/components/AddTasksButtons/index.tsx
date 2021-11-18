@@ -1,13 +1,25 @@
 import React from "react";
-import { View, Image, TouchableOpacity, Text } from "react-native";
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  Text,
+  ImageSourcePropType,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-
 import Modal from "react-native-modal";
-
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import styles from "./styles";
 
 import taskImage from "../../assets/Path.jpg";
 import listImage from "../../assets/Rectangle.jpg";
+
+type ScreensListType = {
+  Main: undefined;
+  AddTask: undefined;
+};
+
+type ScreensTypeProps = NavigationProp<ScreensListType>;
 
 type AddTasksButtonsProps = {
   visible: boolean;
@@ -15,6 +27,12 @@ type AddTasksButtonsProps = {
 };
 
 export const AddTasksButtons = ({ visible, toggle }: AddTasksButtonsProps) => {
+  const navigation = useNavigation<ScreensTypeProps>();
+
+  const navigateToAddTasks = () => {
+    navigation.navigate("AddTask");
+  };
+
   return (
     <Modal
       isVisible={visible}
@@ -26,7 +44,7 @@ export const AddTasksButtons = ({ visible, toggle }: AddTasksButtonsProps) => {
     >
       <View style={styles.buttonsView}>
         <TouchableOpacity style={styles.button}>
-          <Image source={taskImage as any} />
+          <Image source={taskImage as ImageSourcePropType} />
           <View style={styles.textContainer}>
             <Text style={styles.text}>List</Text>
           </View>
@@ -34,8 +52,8 @@ export const AddTasksButtons = ({ visible, toggle }: AddTasksButtonsProps) => {
 
         <View style={styles.separator} />
 
-        <TouchableOpacity style={styles.button}>
-          <Image source={listImage as any} />
+        <TouchableOpacity style={styles.button} onPress={navigateToAddTasks}>
+          <Image source={listImage as ImageSourcePropType} />
           <View style={styles.textContainer}>
             <Text style={styles.text}>Task</Text>
           </View>
