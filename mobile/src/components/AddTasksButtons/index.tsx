@@ -30,6 +30,7 @@ export const AddTasksButtons = ({ visible, toggle }: AddTasksButtonsProps) => {
   const navigation = useNavigation<ScreensTypeProps>();
 
   const navigateToAddTasks = () => {
+    toggle();
     navigation.navigate("AddTask");
   };
 
