@@ -8,60 +8,76 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { theme } from "../../global/theme";
 import styles from "./styles";
 
-/*
-
-        <View style={styles.datePickerContainer}>
-          {show && (
-            <DateTimePicker
-              value={date}
-              mode="datetime"
-              display="default"
-              onChange={onChange as any}
-            />
-          )}
-        </View>
-
-*/
-
 export const AddTimeInformation = () => {
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(true);
-
-  const toggleDatePicker = () => {
-    setShow(!show);
-  };
+  const [show, setShow] = useState(false);
+  const [clockColor, setClockColor] = useState("");
+  const [calendarColor, setCalendarColor] = useState("");
 
   const onChange = (event, selectedDate: Date) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
+
+    // this date will be stored in the date state!
+    console.log(selectedDate);
+  };
+
+  const openDatePicker = () => {
+    setMode("date");
+    setShow(true);
+    setCalendarColor(theme.listColors.blue);
+  };
+
+  const openTimePicker = () => {
+    setMode("time");
+    setShow(true);
+    setClockColor(theme.listColors.blue);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.calendarContainer}>
-          <Feather name="calendar" size={24} color={theme.app.lightGray} />
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <AntDesign
-            name="clockcircleo"
-            size={22}
-            color={theme.app.lightGray}
+        <TouchableOpacity
+          style={styles.calendarContainer}
+          onPress={openDatePicker}
+        >
+          <Feather
+            name="calendar"
+            size={24}
+            color={calendarColor ? calendarColor : theme.app.lightGray}
           />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.listContainer}>
+        <TouchableOpacity onPress={openTimePicker}>
+          <AntDesign
+            name="clockcircleo"
+            size={22}
+            color={clockColor ? clockColor : theme.app.lightGray}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.listContainer}>
           <Text style={styles.listText}>Inbox</Text>
           <View style={styles.listCircle} />
-        </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styles.mainContent}>
         <ListTasks showCheckCircleItem={true} showTaskDetailsItem={false} />
       </View>
+
+      {show && (
+        <DateTimePicker
+          value={date}
+          mode={mode as any}
+          display="default"
+          dateFormat="day month year"
+          is24Hour={false}
+          onChange={onChange as any}
+        />
+      )}
     </View>
   );
 };
