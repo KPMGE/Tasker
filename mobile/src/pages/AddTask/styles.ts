@@ -38,10 +38,15 @@ export default StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center",
+    alignItems: "flex-start",
     paddingLeft: 20,
+    flex: 1,
   },
   textInput: {
     fontSize: 18,
+  },
+  timeInformationContainer: {
+    height: 450,
+    justifyContent: "flex-end",
   },
 });

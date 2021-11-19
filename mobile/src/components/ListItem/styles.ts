@@ -2,10 +2,11 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "flex-start",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     height: 70,
-    width: 300,
+    width: "100%",
     borderRadius: 12,
   },
   texts: {
@@ -20,5 +21,13 @@ export default StyleSheet.create({
     fontSize: 14,
     color: "#fff",
     marginTop: 6,
+  },
+  checkContainer: {
+    flex: 1,
+    flexDirection: "row",
+    height: "100%",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingRight: 20,
   },
 });

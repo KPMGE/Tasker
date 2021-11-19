@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { theme } from "../../global/theme";
+import { AddTimeInformation } from "../../components/AddTimeInformation";
 import styles from "./styles";
 
 export const AddTask = () => {
@@ -28,6 +29,10 @@ export const AddTask = () => {
             selectionColor={theme.listColors.blue}
             style={styles.textInput}
           />
+        </View>
+
+        <View style={styles.timeInformationContainer}>
+          <AddTimeInformation />
         </View>
       </View>
     </View>
