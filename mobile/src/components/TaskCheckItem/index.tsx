@@ -5,6 +5,7 @@ import { theme } from "../../global/theme";
 import styles from "./styles";
 
 type TaskCheckItemProps = {
+  description: string;
   taskTextColor?: string;
   circleColor?: string;
   showRightCircle?: boolean;
@@ -14,6 +15,7 @@ type TaskCheckItemProps = {
 export const TaskCheckItem = (props: TaskCheckItemProps) => {
   const {
     circleColor = "blue",
+    description,
     showRightCircle = true,
     checkboxColor = theme.listColors.blue,
     taskTextColor = theme.app.grayText,
@@ -45,7 +47,7 @@ export const TaskCheckItem = (props: TaskCheckItemProps) => {
               },
             ]}
           >
-            Study React Native
+            {description}
           </Text>
         </View>
 

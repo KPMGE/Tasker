@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 import { TaskCheckItem } from "../TaskCheckItem";
-import { DUMMY_COLORS } from "../../../DummyData/dummy-colors";
+import api from "../../services/api";
 import styles from "./styles";
+
+type TaskType = {
+  _id: string;
+  description: string;
+  color: string;
+  due: Date;
+};
 
 type TaskCheckListProps = {
   showRightCircleItem?: boolean;
@@ -11,19 +18,34 @@ type TaskCheckListProps = {
 };
 
 export const TaskCheckList = (props: TaskCheckListProps) => {
+  const [tasks, setTasks] = useState<TaskType[]>([]);
   const { showRightCircleItem, checkboxColorItem, taskTextItemColor } = props;
+
+  useEffect(() => {
+    const fechTasks = async () => {
+      try {
+        const tasks = await api.get("/tasks");
+        setTasks(tasks.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
+    fechTasks();
+  }, []);
 
   return (
     <FlatList
-      data={DUMMY_COLORS}
-      keyExtractor={(color) => color}
+      data={tasks}
+      keyExtractor={(task) => task._id}
       showsVerticalScrollIndicator={false}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
-      renderItem={(item) => (
+      renderItem={({ item }) => (
         <TaskCheckItem
+          description={item.description}
           showRightCircle={showRightCircleItem}
           checkboxColor={checkboxColorItem}
-          circleColor={item.item}
+          circleColor={item.color}
           taskTextColor={taskTextItemColor}
         />
       )}
