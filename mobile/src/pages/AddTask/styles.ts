@@ -40,7 +40,7 @@ export default StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     paddingLeft: 20,
-    flex: 1,
+    height: "40%",
   },
   textInput: {
     fontSize: 18,
