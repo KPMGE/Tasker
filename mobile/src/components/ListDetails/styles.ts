@@ -6,7 +6,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 15,
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
     marginTop: Constants.statusBarHeight + 10,
   },
   line: {
