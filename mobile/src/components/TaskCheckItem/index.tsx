@@ -38,7 +38,11 @@ export const TaskCheckItem = (props: TaskCheckItemProps) => {
           <Text
             style={[
               styles.description,
-              { opacity: checkboxChecked ? 0.5 : 1, color: taskTextColor },
+              {
+                opacity: checkboxChecked ? 0.5 : 1,
+                color: taskTextColor,
+                textDecorationLine: checkboxChecked ? "line-through" : "none",
+              },
             ]}
           >
             Study React Native

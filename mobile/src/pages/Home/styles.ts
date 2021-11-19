@@ -31,7 +31,7 @@ export default StyleSheet.create({
   },
   listTasksContainer: {
     flex: 1,
-    paddingLeft: 60,
+    paddingLeft: 80,
     width: "100%",
     alignSelf: "flex-end",
     marginRight: 16,
