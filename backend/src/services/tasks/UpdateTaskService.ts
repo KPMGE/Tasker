@@ -1,5 +1,5 @@
-import { Task } from "../models/Task";
-import { TaskType } from "../@types/TaskType";
+import { Task } from "../../models/Task";
+import { TaskType } from "../../@types/TaskType";
 
 export class UpdateTaskService {
   async execute(id: string, { description, color, due }: TaskType) {

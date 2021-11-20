@@ -1,4 +1,4 @@
-import { Task } from "../models/Task";
+import { Task } from "../../models/Task";
 
 export class GetTaskByIdService {
   async execute(id: string) {

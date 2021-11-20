@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from "express";
-import { HttpError } from "../helpers/HttpError";
-import { CreateTaskService } from "../services/CreateTaskService";
-import { TaskType } from "../@types/TaskType";
+import { HttpError } from "../../helpers/HttpError";
+import { CreateTaskService } from "../../services/tasks/CreateTaskService";
+import { TaskType } from "../../@types/TaskType";
 
 export class CreateTaskController {
   async handle(request: Request, response: Response, next: NextFunction) {
-    const { description, color, due } = request.body;
+    const newTask: TaskType = request.body;
     const createTaskService = new CreateTaskService();
 
     let createdTask: TaskType;
     try {
-      createdTask = await createTaskService.execute(description, color, due);
+      createdTask = await createTaskService.execute(newTask);
     } catch (err) {
       return next(new HttpError(err.message, 400));
     }

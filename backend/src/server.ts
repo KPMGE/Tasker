@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import routes from "./routes";
 import { HttpError } from "./helpers/HttpError";
 import { connect } from "mongoose";
+import cors from "cors";
 
 const app = express();
 
@@ -10,9 +11,7 @@ dotenv.config();
 
 app.use(express.json());
 
-app.get("/test", (req, res) => {
-  return res.send("working");
-});
+app.use(cors({ origin: "*" }));
 
 app.use(routes);
 

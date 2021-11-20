@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { HttpError } from "../helpers/HttpError";
-import { UpdateTaskService } from "../services/UpdateTaskService";
-import { TaskType } from "../@types/TaskType";
+import { HttpError } from "../../helpers/HttpError";
+import { UpdateTaskService } from "../../services/tasks/UpdateTaskService";
+import { TaskType } from "../../@types/TaskType";
 
 export class UpdateTaskController {
   async handle(request: Request, response: Response, next: NextFunction) {

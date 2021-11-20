@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { DeleteTaskService } from "../services/DeleteTaskService";
-import { HttpError } from "../helpers/HttpError";
-import { TaskType } from "../@types/TaskType";
+import { DeleteTaskService } from "../../services/tasks/DeleteTaskService";
+import { HttpError } from "../../helpers/HttpError";
+import { TaskType } from "../../@types/TaskType";
 
 export class DeleteTaskController {
   async handle(request: Request, response: Response, next: NextFunction) {

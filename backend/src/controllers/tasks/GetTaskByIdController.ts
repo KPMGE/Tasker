@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { HttpError } from "../helpers/HttpError";
-import { GetTaskByIdService } from "../services/GetTaskByIdService";
+import { HttpError } from "../../helpers/HttpError";
+import { GetTaskByIdService } from "../../services/tasks/GetTaskByIdService";
 
 export class GetTaskByIdController {
   async handle(request: Request, response: Response, next: NextFunction) {
