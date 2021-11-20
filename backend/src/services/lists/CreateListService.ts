@@ -1,10 +1,11 @@
 import { List } from "../../models/List";
 
 export class CreateListService {
-  async execute(title: string) {
+  async execute(title: string, color: string) {
     // create new list
     const newList = new List({
       title,
+      color,
     });
 
     // save it

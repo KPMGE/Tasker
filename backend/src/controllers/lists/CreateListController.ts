@@ -4,11 +4,11 @@ import { HttpError } from "../../helpers/HttpError";
 
 export class CreateListController {
   async handle(request: Request, response: Response, next: NextFunction) {
-    const { title } = request.body;
+    const { title, color } = request.body;
     const createListService = new CreateListService();
 
     try {
-      const list = await createListService.execute(title);
+      const list = await createListService.execute(title, color);
       return response.json(list);
     } catch (err) {
       return next(new HttpError(err.message, 500));
