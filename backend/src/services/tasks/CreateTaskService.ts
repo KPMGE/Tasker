@@ -4,7 +4,7 @@ import { List } from "../../models/List";
 import { ListType } from "../../@types/ListType";
 
 export class CreateTaskService {
-  async execute({ description, color, due, list_id }: TaskType) {
+  async execute({ description, due, list_id }: TaskType) {
     // find the list
     let foundList: ListType;
 
@@ -17,7 +17,7 @@ export class CreateTaskService {
     // create new task
     const newTask = new Task({
       description,
-      color,
+      color: foundList.color,
       due,
       list_id,
     });
