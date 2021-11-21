@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
 import { ListItem } from "../ListItem";
-import { ListsContext } from "../../contexts/ListsContext";
+import api from "../../services/api";
+import { ListType } from "../../@types";
 
 type ListTaskProps = {
   showTaskDetailsItem?: boolean;
@@ -12,7 +13,16 @@ export const ListTasks = ({
   showCheckCircleItem,
   showTaskDetailsItem,
 }: ListTaskProps) => {
-  const lists = useContext(ListsContext);
+  const [lists, setLists] = useState<ListType[]>([]);
+
+  useEffect(() => {
+    const getAllLists = async () => {
+      const response = await api.get("/lists");
+      setLists(response.data);
+    };
+
+    getAllLists();
+  }, []);
 
   return (
     <FlatList
@@ -22,7 +32,7 @@ export const ListTasks = ({
       ItemSeparatorComponent={() => <View style={{ marginBottom: 20 }} />}
       renderItem={({ item }) => (
         <ListItem
-          list_id={item._id}
+          tasks={item.tasks}
           title={item.title}
           color={item.color}
           showDetails={showTaskDetailsItem}

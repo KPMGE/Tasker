@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { Backgroud } from "../../components/Backgroud";
 import { ListTasks } from "../../components/ListTasks";
-import { TaskCheckList } from "../../components/TaskCheckList";
 import { AddTasksButtons } from "../../components/AddTasksButtons";
 import { CircleButton } from "../../components/CircleButton";
+import { TodayTasks } from "../../components/TodayTasks";
 
 import styles from "./styles";
 
@@ -21,7 +21,7 @@ export const Home = () => {
         <Text style={styles.title}>Today</Text>
 
         <View style={styles.todayTasksContainer}>
-          <TaskCheckList />
+          <TodayTasks />
         </View>
 
         <View style={styles.listTasksContainer}>

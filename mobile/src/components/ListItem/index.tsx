@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { ListDetails } from "../ListDetails";
 import { AntDesign } from "@expo/vector-icons";
-import api from "../../services/api";
 import { TaskType } from "../../@types";
 
 import styles from "./styles";
 
 type ListItemProps = {
   color: string;
-  list_id: string;
+  tasks: TaskType[];
   title: string;
   showDetails?: boolean;
   showCheckCircle?: boolean;
@@ -18,25 +17,15 @@ type ListItemProps = {
 export const ListItem = ({
   color,
   title,
-  list_id,
+  tasks,
   showDetails = true,
   showCheckCircle = false,
 }: ListItemProps) => {
   const [show, setShow] = useState(false);
-  const [tasks, setTasks] = useState<TaskType[]>([]);
 
   const toggleShowDetails = () => {
     setShow(!show);
   };
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const response = await api.get(`/list/tasks/${list_id}`);
-      setTasks(response.data);
-    };
-
-    fetchTasks();
-  }, []);
 
   const amountTasks = tasks.length;
 

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
-import { View } from "react-native";
 import { TaskCheckList } from "../TaskCheckList";
 import { TaskType } from "../../@types";
-import styles from "./styles";
 
 export const TodayTasks = () => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
@@ -17,9 +15,5 @@ export const TodayTasks = () => {
     fetchTasks();
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <TaskCheckList tasks={tasks} />
-    </View>
-  );
+  return <TaskCheckList tasks={tasks} />;
 };
