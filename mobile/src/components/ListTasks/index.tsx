@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, FlatList } from "react-native";
 import { ListItem } from "../ListItem";
-import api from "../../services/api";
 import { ListType } from "../../@types";
 
 type ListTaskProps = {
+  lists: ListType[];
   showTaskDetailsItem?: boolean;
   showCheckCircleItem?: boolean;
 };
@@ -12,18 +12,8 @@ type ListTaskProps = {
 export const ListTasks = ({
   showCheckCircleItem,
   showTaskDetailsItem,
+  lists,
 }: ListTaskProps) => {
-  const [lists, setLists] = useState<ListType[]>([]);
-
-  useEffect(() => {
-    const getAllLists = async () => {
-      const response = await api.get("/lists");
-      setLists(response.data);
-    };
-
-    getAllLists();
-  }, []);
-
   return (
     <FlatList
       data={lists}

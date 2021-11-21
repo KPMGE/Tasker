@@ -13,7 +13,7 @@ export const TodayTasks = () => {
     };
 
     fetchTasks();
-  }, []);
+  }, [tasks]);
 
   return <TaskCheckList tasks={tasks} />;
 };

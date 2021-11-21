@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, Animated, Pressable } from "react-native";
 import { ListDetails } from "../ListDetails";
 import { AntDesign } from "@expo/vector-icons";
 import { TaskType } from "../../@types";
+import { Swipeable } from "react-native-gesture-handler";
 
 import styles from "./styles";
 
@@ -22,34 +23,59 @@ export const ListItem = ({
   showCheckCircle = false,
 }: ListItemProps) => {
   const [show, setShow] = useState(false);
+  const amountTasks = tasks.length;
 
   const toggleShowDetails = () => {
     setShow(!show);
   };
 
-  const amountTasks = tasks.length;
+  // Implement this later!
+  const deleteList = async (list_id: string) => {
+    alert("delete list!");
+  };
 
-  console.log("TASKS: ", tasks);
+  const DeleteLeftAction = (progress, dragX) => {
+    const scale = dragX.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, 1],
+      extrapolate: "clamp",
+    });
+
+    return (
+      <View style={styles.deleteAction}>
+        <Animated.Text
+          style={[styles.deleteActionText, { transform: [{ scale }] }]}
+        >
+          Delete
+        </Animated.Text>
+      </View>
+    );
+  };
 
   return (
-    <TouchableOpacity
-      style={[styles.container, { backgroundColor: color }]}
-      onPress={toggleShowDetails}
+    <Swipeable
+      onSwipeableLeftWillOpen={() => deleteList("some id")}
+      renderLeftActions={DeleteLeftAction}
     >
-      {showDetails && show && (
-        <ListDetails title={title} tasks={tasks} color={color} />
-      )}
+      <Pressable
+        style={[styles.container, { backgroundColor: color }]}
+        onPress={toggleShowDetails}
+      >
+        {showDetails && show && (
+          <ListDetails title={title} tasks={tasks} color={color} />
+        )}
 
-      <View style={styles.texts}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.amountTasks}>{amountTasks} tasks</Text>
-      </View>
-
-      {showCheckCircle && show && (
-        <View style={styles.checkContainer}>
-          <AntDesign name="checkcircle" size={28} color="#fff" />
+        <View style={styles.texts}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.amountTasks}>{amountTasks} tasks</Text>
         </View>
-      )}
-    </TouchableOpacity>
+
+        {showCheckCircle && show && (
+          <View style={styles.checkContainer}>
+            <AntDesign name="checkcircle" size={28} color="#fff" />
+          </View>
+        )}
+      </Pressable>
+    </Swipeable>
   );
 };
