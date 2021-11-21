@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, FlatList } from "react-native";
 import { ListItem } from "../ListItem";
-import { DUMMY_COLORS } from "../../../DummyData/dummy-colors";
+import { ListsContext } from "../../contexts/ListsContext";
 
 type ListTaskProps = {
   showTaskDetailsItem?: boolean;
@@ -12,15 +12,19 @@ export const ListTasks = ({
   showCheckCircleItem,
   showTaskDetailsItem,
 }: ListTaskProps) => {
+  const lists = useContext(ListsContext);
+
   return (
     <FlatList
-      data={DUMMY_COLORS}
+      data={lists}
       showsVerticalScrollIndicator={false}
-      keyExtractor={(color) => color}
+      keyExtractor={(list) => list._id}
       ItemSeparatorComponent={() => <View style={{ marginBottom: 20 }} />}
-      renderItem={(color) => (
+      renderItem={({ item }) => (
         <ListItem
-          color={color.item}
+          list_id={item._id}
+          title={item.title}
+          color={item.color}
           showDetails={showTaskDetailsItem}
           showCheckCircle={showCheckCircleItem}
         />

@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TaskCheckList } from "../TaskCheckList";
 import Modal from "react-native-modal";
+import { TaskType } from "../../@types";
 import styles from "./styles";
 
 type ListDetailsProps = {
+  title: string;
   color: string;
+  tasks: TaskType[];
 };
 
-export const ListDetails = ({ color }: ListDetailsProps) => {
+export const ListDetails = ({ title, color, tasks }: ListDetailsProps) => {
   const [visible, setVisible] = useState(true);
 
   const closeModal = () => {
     setVisible(false);
   };
+
+  const amountTasks = tasks.length;
 
   return (
     <Modal
@@ -29,12 +34,13 @@ export const ListDetails = ({ color }: ListDetailsProps) => {
         <TouchableOpacity style={styles.line} onPress={closeModal} />
 
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Shopping</Text>
-          <Text style={styles.subTitle}>3 tasks</Text>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subTitle}>{amountTasks} tasks</Text>
         </View>
 
         <View style={styles.tasksContainer}>
           <TaskCheckList
+            tasks={tasks}
             checkboxColorItem={"rgba(255, 255, 255, 0.5)"}
             showRightCircleItem={false}
             taskTextItemColor="#fff"
