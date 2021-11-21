@@ -24,8 +24,11 @@ export const Home = () => {
       setLists(response.data);
     };
 
+<<<<<<< HEAD
     console.log("Fetch tasks");
 
+=======
+>>>>>>> 57fbd62dd0b08433471cf3ce19fb819d4f385d7c
     getAllLists();
   }, []);
 
