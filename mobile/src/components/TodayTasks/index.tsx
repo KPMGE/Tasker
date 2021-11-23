@@ -10,10 +10,11 @@ export const TodayTasks = () => {
     const fetchTasks = async () => {
       const response = await api.get("/tasks");
       setTasks(response.data);
+      console.log("fetch tasks");
     };
 
     fetchTasks();
-  }, [tasks]);
+  }, []);
 
   return <TaskCheckList tasks={tasks} />;
 };

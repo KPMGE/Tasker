@@ -7,12 +7,14 @@ type ListTaskProps = {
   lists: ListType[];
   showTaskDetailsItem?: boolean;
   showCheckCircleItem?: boolean;
+  setNewColor?: (color: string) => void;
 };
 
 export const ListTasks = ({
   showCheckCircleItem,
   showTaskDetailsItem,
   lists,
+  setNewColor,
 }: ListTaskProps) => {
   return (
     <FlatList
@@ -27,6 +29,7 @@ export const ListTasks = ({
           color={item.color}
           showDetails={showTaskDetailsItem}
           showCheckCircle={showCheckCircleItem}
+          setNewColor={setNewColor}
         />
       )}
     />

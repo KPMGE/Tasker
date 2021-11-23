@@ -1,20 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  deleteAction: {
-    flex: 1,
-    backgroundColor: "#CF081C",
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "flex-start",
-    paddingLeft: 20,
-  },
-  deleteActionText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 17,
-  },
-
   container: {
     flexDirection: "row",
     justifyContent: "flex-start",

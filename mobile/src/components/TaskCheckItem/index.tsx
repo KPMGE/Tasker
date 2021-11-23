@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import CheckBox from "expo-checkbox";
 import { theme } from "../../global/theme";
+
 import styles from "./styles";
 
 type TaskCheckItemProps = {
@@ -14,7 +15,7 @@ type TaskCheckItemProps = {
 
 export const TaskCheckItem = (props: TaskCheckItemProps) => {
   const {
-    circleColor = "blue",
+    circleColor = "#fff",
     description,
     showRightCircle = true,
     checkboxColor = theme.listColors.blue,
