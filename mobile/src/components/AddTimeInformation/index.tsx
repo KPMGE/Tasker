@@ -9,23 +9,36 @@ import { ListContext } from "../../contexts/ListsContext";
 import { theme } from "../../global/theme";
 import styles from "./styles";
 
-export const AddTimeInformation = () => {
+type AddTimeInformationProps = {
+  setDate: (date: Date) => void;
+  onSelectList: (list_id: string) => void;
+};
+
+export const AddTimeInformation = ({
+  setDate,
+  onSelectList,
+}: AddTimeInformationProps) => {
   const lists = useContext(ListContext);
 
-  const [date, setDate] = useState(new Date());
+  const [selectedListTitle, setSelectedListTitle] = useState("Inbox");
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [clockColor, setClockColor] = useState("");
   const [calendarColor, setCalendarColor] = useState("");
   const [colorCircle, setColorCircle] = useState(lists[0].color || "#fff");
 
+  const onSelectListItem = (name: string, list_id: string) => {
+    setSelectedListTitle(name);
+    onSelectList(list_id);
+  };
+
   const onChange = (event, selectedDate: Date) => {
-    const currentDate = selectedDate || date;
+    const currentDate = selectedDate || new Date();
     setShow(Platform.OS === "ios");
     setDate(currentDate);
 
     // this date will be stored in the date state!
-    console.log(selectedDate);
+    //alert(selectedDate.getDate());
   };
 
   const openDatePicker = () => {
@@ -63,13 +76,14 @@ export const AddTimeInformation = () => {
         </TouchableOpacity>
 
         <View style={styles.listContainer}>
-          <Text style={styles.listText}>Inbox</Text>
+          <Text style={styles.listText}>{selectedListTitle}</Text>
           <View style={[styles.listCircle, { backgroundColor: colorCircle }]} />
         </View>
       </View>
 
       <View style={styles.mainContent}>
         <ListTasks
+          onSelectListItem={onSelectListItem}
           lists={lists}
           showCheckCircleItem={true}
           showTaskDetailsItem={false}
@@ -79,7 +93,7 @@ export const AddTimeInformation = () => {
 
       {show && (
         <DateTimePicker
-          value={date}
+          value={new Date()}
           mode={mode as any}
           display="default"
           dateFormat="day month year"

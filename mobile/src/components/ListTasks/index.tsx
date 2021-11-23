@@ -8,6 +8,7 @@ type ListTaskProps = {
   showTaskDetailsItem?: boolean;
   showCheckCircleItem?: boolean;
   setNewColor?: (color: string) => void;
+  onSelectListItem?: (title: string, list_id: string) => void;
 };
 
 export const ListTasks = ({
@@ -15,6 +16,7 @@ export const ListTasks = ({
   showTaskDetailsItem,
   lists,
   setNewColor,
+  onSelectListItem,
 }: ListTaskProps) => {
   return (
     <FlatList
@@ -27,9 +29,11 @@ export const ListTasks = ({
           tasks={item.tasks}
           title={item.title}
           color={item.color}
+          list_id={item._id}
           showDetails={showTaskDetailsItem}
           showCheckCircle={showCheckCircleItem}
           setNewColor={setNewColor}
+          onSelect={onSelectListItem}
         />
       )}
     />

@@ -18,10 +18,10 @@ export default function App() {
       setLists(response.data);
     };
 
-    console.log("Fetch tasks");
+    console.log("Fetch lists");
 
     getAllLists();
-  }, []);
+  }, [lists.length]);
 
   return (
     <ListContext.Provider value={lists}>

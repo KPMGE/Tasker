@@ -10,9 +10,11 @@ type ListItemProps = {
   color: string;
   tasks: TaskType[];
   title: string;
+  list_id: string;
   showDetails?: boolean;
   showCheckCircle?: boolean;
   setNewColor?: (color: string) => void;
+  onSelect?: (title: string, list_id: string) => void;
 };
 
 export const ListItem = ({
@@ -22,6 +24,8 @@ export const ListItem = ({
   showDetails = true,
   showCheckCircle = false,
   setNewColor,
+  list_id,
+  onSelect,
 }: ListItemProps) => {
   const [show, setShow] = useState(false);
   const amountTasks = tasks.length;
@@ -29,6 +33,10 @@ export const ListItem = ({
   const toggleShowDetails = () => {
     if (setNewColor) {
       setNewColor(color);
+    }
+
+    if (onSelect) {
+      onSelect(title, list_id);
     }
 
     setShow(!show);

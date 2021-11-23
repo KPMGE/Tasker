@@ -42,6 +42,8 @@ export const AddTasksButtons = ({ visible, toggle }: AddTasksButtonsProps) => {
       statusBarTranslucent={true}
       hasBackdrop={false}
       onBackButtonPress={toggle}
+      animationOut="zoomOutDown"
+      animationIn="zoomInDown"
     >
       <View style={styles.buttonsView}>
         <TouchableOpacity style={styles.button}>

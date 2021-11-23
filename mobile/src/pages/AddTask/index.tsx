@@ -3,11 +3,34 @@ import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { theme } from "../../global/theme";
 import { AddTimeInformation } from "../../components/AddTimeInformation";
+import api from "../../services/api";
+
 import styles from "./styles";
 
 export const AddTask = () => {
   const navigation = useNavigation();
   const [taskText, setTaskText] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [selectedListId, setSelectedListId] = useState("");
+
+  const createTask = async () => {
+    if (!taskText || !date || !selectedListId) {
+      alert("Please, enter all needed information");
+      return;
+    }
+
+    try {
+      await api.post("/tasks/new", {
+        description: taskText,
+        due: date,
+        list_id: selectedListId,
+      });
+
+      console.log("Task created!");
+    } catch (err) {
+      console.log("ERROR: ", err);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -16,7 +39,7 @@ export const AddTask = () => {
           <Text style={styles.textTopButton}>Cancel</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={createTask}>
           <Text style={styles.textTopButton}>Done</Text>
         </TouchableOpacity>
       </View>
@@ -34,7 +57,10 @@ export const AddTask = () => {
         </View>
 
         <View style={styles.timeInformationContainer}>
-          <AddTimeInformation />
+          <AddTimeInformation
+            onSelectList={setSelectedListId}
+            setDate={setDate}
+          />
         </View>
       </View>
     </View>

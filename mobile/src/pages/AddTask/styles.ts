@@ -43,7 +43,9 @@ export default StyleSheet.create({
     height: "40%",
   },
   textInput: {
-    fontSize: 18,
+    color: theme.app.grayText,
+    opacity: 0.9,
+    fontSize: 20,
   },
   timeInformationContainer: {
     height: 450,
