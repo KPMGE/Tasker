@@ -29,18 +29,16 @@ Now, it's time to see something working, hopefully.
 Here, we have a git showing the final result on the Home Screen. All the information about that tasks is being 
 recovered from the NodeJs server.
 
-![Home Screen - gif](https://github.com/KPMGE/Tasker/blob/main/assets/home.gif)
-
+<img src="https://github.com/KPMGE/Tasker/blob/main/assets/home.gif" height="600"/>
 
 #### Add Task Screen
 Here, we have the opportunity to create a new task.
 
-![Add task - gif](https://github.com/KPMGE/Tasker/blob/main/assets/task-added.gif)
+<img src="https://github.com/KPMGE/Tasker/blob/main/assets/add-task.gif" height="600"/>
 
 <hr>
 
 Now that we have added a task, it will appear on the Home Screen. All this information will be available even 
 if the user closes the application, because our backend is storing our information in a DataBase, the MongoDB DataBase in our case.
+<img src="https://github.com/KPMGE/Tasker/blob/main/assets/task-added.gif" height="600"/>
 
-
-![Task added - gif](https://github.com/KPMGE/Tasker/blob/main/assets/add-task.gif)
