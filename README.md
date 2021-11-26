@@ -14,7 +14,7 @@ even better. Because with it, we can create our own types, define our own rules 
 the building process faster and less error prone. 
 
 For the backend, in addition to Typescript, i have chosen NodeJs, Express and MongoDB. I like that stack, 
-because with it we can create good backend services as i did. More than that, i have run this entire bacend server 
+because with it we can create good backend services as i did. More than that, i have run this entire backend server 
 with Docker. And it was a great experience for me as well.
 
 For the frontend i have used the React Native framework because i have been working with a lot of web technologies so far,
@@ -29,4 +29,16 @@ Now, it's time to see something working, hopefully.
 Here, we have a git showing the final result on the Home Screen. All the information about that tasks is being 
 recovered from the NodeJs server.
 
-![Home Screen - gif]()
+<img src="https://github.com/KPMGE/Tasker/blob/main/assets/home.gif" height="600"/>
+
+#### Add Task Screen
+Here, we have the opportunity to create a new task.
+
+<img src="https://github.com/KPMGE/Tasker/blob/main/assets/add-task.gif" height="600"/>
+
+<hr>
+
+Now that we have added a task, it will appear on the Home Screen. All this information will be available even 
+if the user closes the application, because our backend is storing our information in a DataBase, the MongoDB DataBase in our case.
+<img src="https://github.com/KPMGE/Tasker/blob/main/assets/task-added.gif" height="600"/>
+
