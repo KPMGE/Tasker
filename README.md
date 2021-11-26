@@ -40,5 +40,5 @@ Here, we have the opportunity to create a new task.
 
 Now that we have added a task, it will appear on the Home Screen. All this information will be available even 
 if the user closes the application, because our backend is storing our information in a DataBase, the MongoDB DataBase in our case.
-<img src="https://github.com/KPMGE/Tasker/blob/main/assets/task-added.gif" height="600"/>
 
+<img src="https://github.com/KPMGE/Tasker/blob/main/assets/task-added.gif" height="600"/>
