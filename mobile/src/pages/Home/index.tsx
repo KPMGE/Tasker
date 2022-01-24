@@ -1,17 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { Backgroud } from "../../components/Backgroud";
 import { ListTasks } from "../../components/ListTasks";
 import { AddTasksButtons } from "../../components/AddTasksButtons";
 import { CircleButton } from "../../components/CircleButton";
 import { TodayTasks } from "../../components/TodayTasks";
-import { ListContext } from "../../contexts/ListsContext";
+
+import { useLists } from "../../hooks/useLists";
 
 import styles from "./styles";
 
 export const Home = () => {
+  const { lists } = useLists();
+  console.log("Lists!", lists);
   const [showAddButtons, setShowAddButtons] = useState(false);
-  const lists = useContext(ListContext);
 
   const toggleShowAddButtons = () => {
     setShowAddButtons(!showAddButtons);

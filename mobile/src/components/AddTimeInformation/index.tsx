@@ -4,7 +4,7 @@ import { ListTasks } from "../ListTasks";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { ListContext } from "../../contexts/ListsContext";
+import { useLists } from "../../hooks/useLists";
 
 import { theme } from "../../global/theme";
 import styles from "./styles";
@@ -18,7 +18,11 @@ export const AddTimeInformation = ({
   setDate,
   onSelectList,
 }: AddTimeInformationProps) => {
-  const lists = useContext(ListContext);
+  const { lists } = useLists();
+
+  if (lists == null) {
+    return;
+  }
 
   const [selectedListTitle, setSelectedListTitle] = useState("Inbox");
   const [mode, setMode] = useState("date");

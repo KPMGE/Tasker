@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from "react";
-import api from "../../services/api";
+import React from "react";
+import { useLists } from "../../hooks/useLists";
 import { TaskCheckList } from "../TaskCheckList";
-import { TaskType } from "../../@types";
 
 export const TodayTasks = () => {
-  const [tasks, setTasks] = useState<TaskType[]>([]);
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const response = await api.get("/tasks");
-      setTasks(response.data);
-      console.log("fetch tasks");
-    };
-
-    fetchTasks();
-  }, []);
+  const { tasks } = useLists();
 
   return <TaskCheckList tasks={tasks} />;
 };

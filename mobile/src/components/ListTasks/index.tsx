@@ -4,7 +4,7 @@ import { ListItem } from "../ListItem";
 import { ListType } from "../../@types";
 
 type ListTaskProps = {
-  lists: ListType[];
+  lists: ListType[] | null;
   showTaskDetailsItem?: boolean;
   showCheckCircleItem?: boolean;
   setNewColor?: (color: string) => void;
