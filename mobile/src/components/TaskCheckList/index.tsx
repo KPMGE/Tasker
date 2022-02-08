@@ -5,7 +5,7 @@ import { TaskType } from "../../@types";
 import styles from "./styles";
 
 type TaskCheckListProps = {
-  tasks: TaskType[];
+  tasks: TaskType[] | null;
   showRightCircleItem?: boolean;
   checkboxColorItem?: string;
   taskTextItemColor?: string;

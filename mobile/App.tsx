@@ -1,30 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Home } from "./src/pages/Home";
 import { AddTask } from "./src/pages/AddTask";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import api from "./src/services/api";
-import { ListType } from "./src/@types";
-import { ListContext } from "./src/contexts/ListsContext";
+
+import { View, Text } from "react-native";
+import { useLists } from "./src/hooks/useLists";
+import { ListsProvider } from "./src/contexts/ListsProvider";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [lists, setLists] = useState<ListType[]>([]);
+  const { loading, error } = useLists();
 
-  useEffect(() => {
-    const getAllLists = async () => {
-      const response = await api.get("/lists");
-      setLists(response.data);
-    };
+  if (loading) {
+    return (
+      <View>
+        <Text>loading....</Text>
+      </View>
+    );
+  }
 
-    console.log("Fetch lists");
-
-    getAllLists();
-  }, [lists.length]);
+  if (error) {
+    return (
+      <View>
+        <Text>Something went wrong....</Text>
+      </View>
+    );
+  }
 
   return (
-    <ListContext.Provider value={lists}>
+    <ListsProvider>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -35,6 +41,6 @@ export default function App() {
           <Stack.Screen name="AddTask" component={AddTask} />
         </Stack.Navigator>
       </NavigationContainer>
-    </ListContext.Provider>
+    </ListsProvider>
   );
 }
