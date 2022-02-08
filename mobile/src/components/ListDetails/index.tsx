@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TaskCheckList } from "../TaskCheckList";
 import Modal from "react-native-modal";
@@ -12,11 +12,7 @@ type ListDetailsProps = {
 };
 
 export const ListDetails = ({ title, color, tasks }: ListDetailsProps) => {
-  const [visible, setVisible] = useState(true);
-
-  const closeModal = () => {
-    setVisible(false);
-  };
+  const [visible, toggle] = useReducer((visible) => !visible, true);
 
   const amountTasks = tasks.length;
 
@@ -27,11 +23,11 @@ export const ListDetails = ({ title, color, tasks }: ListDetailsProps) => {
       animationIn="slideInUp"
       hasBackdrop={false}
       swipeDirection="down"
-      onBackButtonPress={closeModal}
-      onSwipeComplete={closeModal}
+      onBackButtonPress={toggle}
+      onSwipeComplete={toggle}
     >
       <View style={[styles.container, { backgroundColor: color }]}>
-        <TouchableOpacity style={styles.line} onPress={closeModal} />
+        <TouchableOpacity style={styles.line} onPress={toggle} />
 
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{title}</Text>

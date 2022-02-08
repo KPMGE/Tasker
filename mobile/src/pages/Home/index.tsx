@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { Text, View } from "react-native";
 import { Backgroud } from "../../components/Backgroud";
 import { ListTasks } from "../../components/ListTasks";
@@ -6,18 +6,16 @@ import { AddTasksButtons } from "../../components/AddTasksButtons";
 import { CircleButton } from "../../components/CircleButton";
 import { TodayTasks } from "../../components/TodayTasks";
 
-import { useLists } from "../../hooks/useLists";
+//import { useLists } from "../../hooks/useLists";
 
 import styles from "./styles";
 
 export const Home = () => {
-  const { lists } = useLists();
-  console.log("Lists!", lists);
-  const [showAddButtons, setShowAddButtons] = useState(false);
-
-  const toggleShowAddButtons = () => {
-    setShowAddButtons(!showAddButtons);
-  };
+  //const { lists } = useLists();
+  const [showAddButtons, toggleShowAddButtons] = useReducer(
+    (showAddButtons) => !showAddButtons,
+    false
+  );
 
   return (
     <Backgroud>
@@ -30,7 +28,7 @@ export const Home = () => {
 
         <View style={styles.listTasksContainer}>
           <Text style={styles.lists}>Lists</Text>
-          <ListTasks lists={lists} />
+          <ListTasks />
         </View>
 
         {!showAddButtons && (

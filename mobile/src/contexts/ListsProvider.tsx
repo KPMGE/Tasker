@@ -11,6 +11,7 @@ interface ValueTypes {
   tasks: TaskType[] | null;
   loading: boolean;
   error: boolean;
+  addTask: (task: TaskType) => void;
 }
 
 const defaultObject: ValueTypes = {
@@ -18,6 +19,7 @@ const defaultObject: ValueTypes = {
   loading: false,
   error: false,
   tasks: null,
+  addTask: (task: TaskType) => null,
 };
 
 export const ListContext = createContext<ValueTypes>(defaultObject);
@@ -27,6 +29,29 @@ export const ListsProvider: React.FC<Props> = ({ children }) => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+
+  const addTask = async (newTask: TaskType) => {
+    const listToAdd = lists.find((list) => list._id == newTask.list_id);
+
+    if (!listToAdd) {
+      console.log("List not found!");
+      return;
+    }
+
+    try {
+      await api.post("tasks/new", {
+        description: newTask.description,
+        due: newTask.due,
+        list_id: newTask.list_id,
+      });
+
+      setTasks([...tasks, newTask]);
+
+      console.log("task saved!");
+    } catch (error) {
+      console.log("Error when saving task");
+    }
+  };
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -48,7 +73,7 @@ export const ListsProvider: React.FC<Props> = ({ children }) => {
   }, []);
 
   return (
-    <ListContext.Provider value={{ lists, loading, error, tasks }}>
+    <ListContext.Provider value={{ lists, loading, error, tasks, addTask }}>
       {children}
     </ListContext.Provider>
   );

@@ -17,7 +17,7 @@ type ListItemProps = {
   onSelect?: (title: string, list_id: string) => void;
 };
 
-export const ListItem = ({
+export const ListItem: React.FC<ListItemProps> = ({
   color,
   title,
   tasks,
@@ -26,8 +26,8 @@ export const ListItem = ({
   setNewColor,
   list_id,
   onSelect,
-}: ListItemProps) => {
-  const [show, setShow] = useState(false);
+}) => {
+  const [show, setShow] = useState(() => false);
   const amountTasks = tasks.length;
 
   const toggleShowDetails = () => {

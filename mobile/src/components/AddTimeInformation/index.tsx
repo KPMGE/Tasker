@@ -1,35 +1,35 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Platform } from "react-native";
 import { ListTasks } from "../ListTasks";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { useLists } from "../../hooks/useLists";
 
 import { theme } from "../../global/theme";
 import styles from "./styles";
+import { ListType } from "../../@types";
 
-type AddTimeInformationProps = {
-  setDate: (date: Date) => void;
-  onSelectList: (list_id: string) => void;
-};
+interface AddTimeInformationProps {
+  setDate: React.Dispatch<React.SetStateAction<Date>>;
+  onSelectList: React.Dispatch<React.SetStateAction<string>>;
+  lists: ListType[] | null;
+}
 
-export const AddTimeInformation = ({
+export const AddTimeInformation: React.FC<AddTimeInformationProps> = ({
   setDate,
   onSelectList,
-}: AddTimeInformationProps) => {
-  const { lists } = useLists();
-
-  if (lists == null) {
-    return;
+  lists,
+}) => {
+  if (!lists) {
+    return null;
   }
 
-  const [selectedListTitle, setSelectedListTitle] = useState("Inbox");
+  const [selectedListTitle, setSelectedListTitle] = useState(lists[0].title);
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [clockColor, setClockColor] = useState("");
   const [calendarColor, setCalendarColor] = useState("");
-  const [colorCircle, setColorCircle] = useState(lists[0].color || "#fff");
+  const [colorCircle, setColorCircle] = useState(lists[0].color || "#000");
 
   const onSelectListItem = (name: string, list_id: string) => {
     setSelectedListTitle(name);
@@ -88,7 +88,6 @@ export const AddTimeInformation = ({
       <View style={styles.mainContent}>
         <ListTasks
           onSelectListItem={onSelectListItem}
-          lists={lists}
           showCheckCircleItem={true}
           showTaskDetailsItem={false}
           setNewColor={setColorCircle}

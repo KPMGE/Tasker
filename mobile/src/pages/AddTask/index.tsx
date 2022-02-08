@@ -3,33 +3,56 @@ import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { theme } from "../../global/theme";
 import { AddTimeInformation } from "../../components/AddTimeInformation";
-import api from "../../services/api";
 
 import styles from "./styles";
+import { useLists } from "../../hooks/useLists";
+import { useTask } from "../../hooks/useTask";
 
 export const AddTask = () => {
   const navigation = useNavigation();
-  const [taskText, setTaskText] = useState("");
-  const [date, setDate] = useState(new Date());
-  const [selectedListId, setSelectedListId] = useState("");
+  const { lists } = useLists();
+
+  if (!lists) return;
+
+  const firstList = lists[0];
+
+  const {
+    description,
+    _id,
+    color,
+    due,
+    list_id,
+    setDescription,
+    setId,
+    setDue,
+    setListId,
+    setColor,
+  } = useTask({ ...lists[0].tasks[0], description: "", due: new Date() });
+
+  const [selectedListId, setSelectedListId] = useState(firstList._id);
+
+  const { addTask } = useLists();
 
   const createTask = async () => {
-    if (!taskText || !date || !selectedListId) {
+    if (!description || !due || !selectedListId) {
       alert("Please, enter all needed information");
       return;
     }
 
-    try {
-      await api.post("/tasks/new", {
-        description: taskText,
-        due: date,
-        list_id: selectedListId,
-      });
+    const newTask = {
+      description,
+      _id,
+      color,
+      due,
+      list_id,
+      setDescription,
+      setId,
+      setDue,
+      setListId,
+      setColor,
+    };
 
-      console.log("Task created!");
-    } catch (err) {
-      console.log("ERROR: ", err);
-    }
+    addTask(newTask);
   };
 
   return (
@@ -52,14 +75,15 @@ export const AddTask = () => {
             placeholderTextColor="rgba(0, 0, 0, 0.2)"
             selectionColor={theme.listColors.blue}
             style={styles.textInput}
-            onChangeText={(text) => setTaskText(text)}
+            onChangeText={(text) => setDescription(text)}
           />
         </View>
 
         <View style={styles.timeInformationContainer}>
           <AddTimeInformation
             onSelectList={setSelectedListId}
-            setDate={setDate}
+            setDate={setDue}
+            lists={lists}
           />
         </View>
       </View>

@@ -1,23 +1,23 @@
 import React from "react";
 import { View, FlatList } from "react-native";
 import { ListItem } from "../ListItem";
-import { ListType } from "../../@types";
+import { useLists } from "../../hooks/useLists";
 
 type ListTaskProps = {
-  lists: ListType[] | null;
   showTaskDetailsItem?: boolean;
   showCheckCircleItem?: boolean;
   setNewColor?: (color: string) => void;
   onSelectListItem?: (title: string, list_id: string) => void;
 };
 
-export const ListTasks = ({
+export const ListTasks: React.FC<ListTaskProps> = ({
   showCheckCircleItem,
   showTaskDetailsItem,
-  lists,
   setNewColor,
   onSelectListItem,
-}: ListTaskProps) => {
+}) => {
+  const { lists } = useLists();
+
   return (
     <FlatList
       data={lists}
